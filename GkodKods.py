@@ -100,20 +100,6 @@ def main():
             G1(Rs + 10, posZ)
             C(posC)
 
-        def CylTop():
-            for z in range(int(Rc/Zstep)+1):
-                beta = math.asin((Rc - z*Zstep)/Rc)
-                Rloc = Rc*math.sin(beta)
-                for a in range(int(2*(math.radians(90)-math.atan(Rloc/(Hc/2))))+1):
-                    k1 = (Rc**2)*(math.cos(a*Cstep))**2
-                    k2 = (1-(math.cos(a*Cstep))**2)
-
-                    Diskr = 4*(Rc**2)*(k2**2) + 4*k1*k2
-
-                    Dr = (-2*Rc*k2 + math.sqrt(Diskr))/(2*k2 + 0.0001)
-
-                    G101(Dr, z*Zstep, a*Cstep)
-
         file.writelines(setup)
 
         LineA(Rc, Hc, posZ, 0)

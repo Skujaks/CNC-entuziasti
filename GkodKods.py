@@ -98,7 +98,7 @@ def main():
                 posZ = DeltaZ(r, z)
                 G101(posX, posZ, posC)
             G1(Rs + 10, posZ)
-            C()
+            C(posC)
 
         def CylTop():
             for z in range(int(Rc/Zstep)+1):

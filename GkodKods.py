@@ -28,7 +28,8 @@ def main():
         # Write content to the file
         setup = ['T121212\n', 'G50S3500\n', 'G96S200M3\n', 'G0\n', '\n']
         VirpaSet = ['T121212\n', 'G50S3500\n', 'G96S200M3\n', '\n']
-        VirpaSet = ['T121212\n', 'G50S3500\n', 'G96S200M3\n', '\n']
+        VirpaStop = ['T121212\n', 'G50S3500\n', 'G96S200M3\n', '\n']
+        Virpa1 = ['G1 X50 G1 Z-67\n' 'G1 X48\n' 'G1 Z-0\n' 'G1 X47.2\n' 'G1 Z-47\n' 'G1 X43\n' 'G1 Z-25\n' 'G1 X12\n' 'G1 Z-32\n', '\n']
         FrezeSet = ['T060606\n', 'M110\n', 'M146\n', 'G94\n', 'SB=3000 M13\n', 'M15\n', '\n']
         end = ['\n', 'G1 X' + str(round(2*posX + 20, 3)) + ' Z' +  str(round(posZ, 3)) + '\n', 'G0 35X Z10\n', 'G96S0M3\n', 'M30\n']
 
@@ -71,6 +72,9 @@ def main():
             gamma = (math.radians(180) - theta)/2
             return gamma
         
+        def Pos():
+            return 0
+        
         def DeltaX(a, b, z, c, case):
             x = a
             return x
@@ -98,11 +102,17 @@ def main():
                 posZ = DeltaZ(r, z)
                 G101(posX, posZ, posC)
             G1(Rs + 10, posZ)
-            C(posC)
+            C(alpha + gamma)
+           
+
+#######################################################################################
+
+        G1(30, 4)
+        C(70)
 
         file.writelines(setup)
 
-        LineA(Rc, Hc, posZ, 0)
+        LineA(Rc, Hc, posZ, 0, 0)
         #CylTop()
         file.writelines(end)
 

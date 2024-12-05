@@ -139,6 +139,8 @@ def main():
             global posZ
             global posC
 
+            #F(a)
+
             posZ = z + DeltaZ(beta)
             deltRf = DeltaR(beta)
 
@@ -147,8 +149,11 @@ def main():
 
             for c in range(int(theta/Cstep)+1):
                 posC = c*Cstep + gamma
+                C(posC)
                 posC += DeltaC(a, posC, deltRf)
+                C(posC)
                 posX = DeltaX(a, posC, deltRf)
+                C(posC)
                 #file.write('X ' + str(round(posX, 3)) + '\n')
                 posC += alpha
                 if (posC > 360):
@@ -165,13 +170,15 @@ def main():
 
         def Mala1(a, b, Zh, Zoff, alpha, beta):
             for z in range(int(Zh/Zstep)):
-                Line(a + z*Zstep*math.tan(math.radians*(beta)), b, -z*Zstep - Zoff, alpha, beta)
+                Line(a + z*Zstep*math.tan(math.radians(beta)), b, -z*Zstep - Zoff, alpha, beta)
 #######################################################################################
 
         file.writelines(setup)
 
+        Line(Rc, Hc, posZ, 0, 0)
         #Line(Rc, Hc, posZ, 0, 0)
-        Mala1()
+
+        Mala1(10, 30, 15, 32, 0, 18.435)
 
         file.writelines(end)
 
